@@ -1,4 +1,4 @@
-# 🔐 GNS3 Server Installation Bare Metal Execution Order (Do Not Deviate)
+# GNS3 Server Installation Bare Metal Execution Order on Debian based operating Systems (Do Not Deviate)
 
 This is the order you should execute the GNS3 Server Installation on Bare Metal.
 
@@ -6,8 +6,8 @@ This is the order you should execute the GNS3 Server Installation on Bare Metal.
 | ---- | ---------------------------- | ----------- | ---------------------------- |
 | 01   | `01-prepare-gns3-host.sh`    | root        | ✅ YES                        |
 | 02   | `02-install-docker.sh`       | root        | ✅ YES                        |
-| 03   | `03-install-gns3-server.sh`  | root        | ❌ (recommended but optional) |
-| 04   | `04-bridge-tap-provision.sh` | root        | ❌                            |
+| 03   | `03-install-gns3-server.sh`  | root        | ✅ YES |
+| 04   | `04-bridge-tap-provision.sh` | root        | ✅ YES                        |
 | 05   | GNS3 GUI connects            | user `gns3` | —                            |
 
 > **Note:**
