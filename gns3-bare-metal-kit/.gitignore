@@ -1,0 +1,15 @@
+.DS_Store
+*.swp
+*.bak
+*.log
+*.tmp
+
+# Editors
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+
+# Archives
+*.zip

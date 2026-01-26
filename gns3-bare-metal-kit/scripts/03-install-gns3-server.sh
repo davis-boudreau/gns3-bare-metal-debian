@@ -4,7 +4,6 @@
 # Script:      03-install-gns3-server.sh
 # Version:     1.0.0
 # Author:      Davis Boudreau
-# Email:       davis.boudreau@nscc.ca
 # License:     MIT
 # SPDX-License-Identifier: MIT
 #
@@ -38,6 +37,7 @@ need_root
 
 init_logging
 setup_traps
+require_real_run
 report_add "Script" "$(basename "$0")"
 report_add "Service installed" "gns3server.service"
 report_add "Config file" "/home/${GNS3_USER}/.config/GNS3/2.2/gns3_server.conf"
@@ -104,9 +104,9 @@ run udevadm control --reload-rules
 run udevadm trigger /dev/kvm || true
 
 echo "[10/12] Writing authoritative GNS3 server configuration..."
-UBRIDGE_PATH="$(command -v ubridge)"
-QEMU_PATH="$(command -v qemu-system-x86_64)"
-DYNAMIPS_PATH="$(command -v dynamips || true)"
+UBRIDGE_PATH="$(command -v ubridge 2>/dev/null || true)"
+QEMU_PATH="$(command -v qemu-system-x86_64 2>/dev/null || true)"
+DYNAMIPS_PATH="$(command -v dynamips 2>/dev/null || true)"
 [[ -x "${UBRIDGE_PATH}" ]] || die "ubridge not executable."
 
 run sudo -u "${GNS3_USER}" -H mkdir -p "${GNS3_CFG_DIR}"

@@ -4,7 +4,6 @@
 # Script:      05-expand-root-lvm-ubuntu.sh
 # Version:     1.0.0
 # Author:      Davis Boudreau
-# Email:       davis.boudreau@nscc.ca
 # License:     MIT
 # SPDX-License-Identifier: MIT
 #
@@ -33,6 +32,7 @@ need_root
 
 init_logging
 setup_traps
+require_real_run
 report_add "Script" "$(basename "$0")"
 report_add "Target LV" "/dev/mapper/ubuntu--vg-ubuntu--lv"
 report_add "Reboot required" "NO"

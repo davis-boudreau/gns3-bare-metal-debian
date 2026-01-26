@@ -4,7 +4,6 @@
 # Script:      01-prepare-gns3-host.sh
 # Version:     1.0.0
 # Author:      Davis Boudreau
-# Email:       davis.boudreau@nscc.ca
 # License:     MIT
 # SPDX-License-Identifier: MIT
 #
@@ -56,6 +55,7 @@ need_root
 
 init_logging
 setup_traps
+require_real_run
 report_add "Script" "$(basename "$0")"
 report_add "Netplan file" "/etc/netplan/01-static-ip.yaml"
 report_add "SSH drop-in" "/etc/ssh/sshd_config.d/99-gns3-lab.conf"

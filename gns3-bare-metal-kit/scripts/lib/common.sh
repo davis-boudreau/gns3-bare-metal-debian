@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
 #==============================================================================
-# Project:     GNS3 Bare-Metal Server Kit (Ubuntu 24.04)
-# Script:      01-prepare-gns3-host.sh
-# Version:     1.0.0
-# Author:      Davis Boudreau
-# Email:       davis.boudreau@nscc.ca
-# License:     MIT
-# SPDX-License-Identifier: MIT
-#
-# Summary: Common helpers for the GNS3 Bare-Metal Server Kit
+# Common helpers for the GNS3 Bare-Metal Server Kit
 #==============================================================================
 
 set -euo pipefail
@@ -226,4 +218,23 @@ copy_file() {
     return 0
   fi
   cp -a "${src}" "${dst}"
+}
+
+
+# -----------------------------
+# Dry-run safety for install scripts
+# -----------------------------
+is_dry_run() { [[ "${DRY_RUN}" -eq 1 ]]; }
+
+require_real_run() {
+  # Use in scripts that cannot proceed meaningfully in --dry-run mode because
+  # later steps assume packages/files/services exist.
+  if is_dry_run; then
+    echo ""
+    echo "DRY-RUN: This script will NOT make changes and will NOT attempt verification."
+    echo "DRY-RUN: Re-run without --dry-run to perform installation."
+    report_add "Dry-run note" "Skipped install/verify"
+    REPORT_STATUS="SUCCESS"
+    exit 0
+  fi
 }

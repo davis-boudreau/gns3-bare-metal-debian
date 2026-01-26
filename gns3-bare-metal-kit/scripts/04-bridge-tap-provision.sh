@@ -4,7 +4,6 @@
 # Script:      04-bridge-tap-provision.sh
 # Version:     1.0.0
 # Author:      Davis Boudreau
-# Email:       davis.boudreau@nscc.ca
 # License:     MIT
 # SPDX-License-Identifier: MIT
 #
@@ -45,6 +44,7 @@ SYSTEMD_DST="/etc/systemd/system/gns3-taps.service"
 need_root
 init_logging
 setup_traps
+require_real_run
 report_add "Script" "$(basename "$0")"
 report_add "Bridge" "${BR}"
 report_add "TAPs" "${TAP0},${TAP1}"
