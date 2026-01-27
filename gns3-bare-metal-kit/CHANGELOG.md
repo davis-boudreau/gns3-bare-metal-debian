@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.4] - 2026-01-26
+### Fixed
+- gns3-taps systemd unit template now uses systemd-native error-tolerant commands (no shell redirections), preventing service failures and missing TAPs
+
 ## [1.0.3] - 2026-01-25
 ### Fixed
 - Dry-run mode now exits early for install scripts to prevent partial runs and false failures

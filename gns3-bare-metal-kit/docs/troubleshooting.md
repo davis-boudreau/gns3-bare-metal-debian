@@ -72,3 +72,19 @@ sudo bash scripts/07-verify-host.sh
 ```
 
 If NOT READY, include the verify output and relevant log files in `/var/log/gns3-bare-metal/`.
+
+
+## TAP service fails (gns3-taps.service)
+
+If `gns3-taps.service` fails with errors mentioning `2>/dev/null` or `garbage`, ensure your unit file does not contain shell redirection in `ExecStart*` lines. systemd does not run these commands through a shell.
+
+Fix by using systemd’s error-tolerant prefix `-`:
+
+- `ExecStartPre=-/usr/sbin/ip link del tap0`
+
+Then reload and restart:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart gns3-taps
+```

@@ -6,10 +6,12 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
+User=gns3
+Group=gns3
 
 # Ensure idempotent start: delete existing TAPs first (ignore errors)
-ExecStartPre=/usr/sbin/ip link del tap0 2>/dev/null
-ExecStartPre=/usr/sbin/ip link del tap1 2>/dev/null
+ExecStartPre=-/usr/sbin/ip link del tap0
+ExecStartPre=-/usr/sbin/ip link del tap1
 
 # Create TAPs owned by gns3, then attach to bridge
 ExecStart=/usr/sbin/ip tuntap add dev tap0 mode tap user gns3
@@ -19,10 +21,11 @@ ExecStart=/usr/sbin/ip link set tap1 up
 ExecStart=/usr/sbin/ip link set tap0 master br0
 ExecStart=/usr/sbin/ip link set tap1 master br0
 
-ExecStop=/usr/sbin/ip link set tap0 nomaster
-ExecStop=/usr/sbin/ip link set tap1 nomaster
-ExecStop=/usr/sbin/ip link del tap0
-ExecStop=/usr/sbin/ip link del tap1
+# Stop actions should also be tolerant
+ExecStop=-/usr/sbin/ip link set tap0 nomaster
+ExecStop=-/usr/sbin/ip link set tap1 nomaster
+ExecStop=-/usr/sbin/ip link del tap0
+ExecStop=-/usr/sbin/ip link del tap1
 
 [Install]
 WantedBy=multi-user.target
