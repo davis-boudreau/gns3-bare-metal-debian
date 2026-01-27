@@ -2,25 +2,53 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.2] - 2026-01-23
-### Added
-- 07-verify-host.sh non-mutating host readiness report (KVM/Docker/GNS3/bridge/TAPs)
+---
 
-## [1.0.1] - 2026-01-23
-### Added
-- Automatic file logging to /var/log/gns3-bare-metal (all scripts)
-- --dry-run flag across scripts (prints commands; skips mutating actions)
-- Install report summary at end of each script
-- Failure trap with line number + summary
-- 06-collect-logs.sh helper script
+## [1.0.4] - 2026-01-26
 
-## [1.0.0] - 2026-01-22
 ### Added
-- Ubuntu 24.04 bare-metal install scripts (01–04) for:
-  - host preparation (static IP via Netplan, SSH, KVM baseline)
-  - Docker CE install
-  - GNS3 server install (PPA), systemd service, verification gate
-  - Linux bridge + persistent TAPs (systemd oneshot service)
-- Optional Ubuntu default-LVM root expansion script (05)
-- Docs: install / architecture / troubleshooting / security notes
-- Repo hygiene files: LICENSE, SECURITY.md, .editorconfig, .gitignore
+- Step 00 installation workflow for copying files from USB or local media
+- Optional root filesystem expansion script:
+  - `05-expand-root-lvm-ubuntu.sh`
+- Host readiness verification script:
+  - `07-verify-host.sh`
+- Structured install report summary output
+- Formal install flow documentation in `install.md`
+
+### Fixed
+- Critical systemd TAP service failure caused by shell redirection (`2>/dev/null`)
+- Replaced with systemd-native error-tolerant syntax (`ExecStartPre=-`)
+- Ensured persistent creation of:
+  - `tap0`
+  - `tap1`
+- Verified clean bridge attachment to `br0`
+
+### Improved
+- Documentation clarity and execution order enforcement
+- Logging consistency across all scripts
+- Separation between OS preparation and networking abstraction layers
+- Improved student and lab safety during Netplan operations
+
+---
+
+## [1.0.3] - 2026-01-25
+- Logging framework introduced
+- Dry-run mode added
+- Trap-based failure handling
+- Structured install summaries
+
+---
+
+## [1.0.2]
+- Initial verification tooling
+- Early systemd service support
+
+---
+
+## [1.0.1]
+- Baseline installer release
+
+---
+
+## [1.0.0]
+- Initial bare-metal GNS3 deployment framework
