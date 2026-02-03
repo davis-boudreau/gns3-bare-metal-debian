@@ -44,9 +44,9 @@ NET_NAME="default"
 BR_NAME="virbr0"
 
 IP_ADDR="192.168.100.1"
-NETMASK="255.255.255.192"
-DHCP_START="192.168.100.33"
-DHCP_END="192.168.100.62"
+NETMASK="255.255.255.0"
+DHCP_START="192.168.100.129"
+DHCP_END="192.168.100.190"
 
 report_add "Script" "$(basename "$0")"
 report_add "Libvirt network" "${NET_NAME}"
